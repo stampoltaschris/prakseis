@@ -1,0 +1,165 @@
+<UserControl x:Class="ExpressionSolverApp.UI.Controls.VirtualKeyboardControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="260" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style x:Key="KeyButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2A2F3D" />
+            <Setter Property="Foreground" Value="#E2E8F0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#3F475A" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#3B4254" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="#6366F1" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#4F46E5" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="OpButtonStyle" TargetType="Button" BasedOn="{StaticResource KeyButtonStyle}">
+            <Setter Property="Background" Value="#1E293B" />
+            <Setter Property="Foreground" Value="#818CF8" />
+            <Setter Property="BorderBrush" Value="#4338CA" />
+        </Style>
+
+        <Style x:Key="KeywordButtonStyle" TargetType="Button" BasedOn="{StaticResource KeyButtonStyle}">
+            <Setter Property="Background" Value="#1E2030" />
+            <Setter Property="Foreground" Value="#F59E0B" />
+            <Setter Property="BorderBrush" Value="#D97706" />
+        </Style>
+
+        <Style x:Key="ActionButtonStyle" TargetType="Button" BasedOn="{StaticResource KeyButtonStyle}">
+            <Setter Property="Background" Value="#331018" />
+            <Setter Property="Foreground" Value="#F87171" />
+            <Setter Property="BorderBrush" Value="#991B1B" />
+        </Style>
+    </UserControl.Resources>
+
+    <Border Background="#181E2A" CornerRadius="12" Padding="8" BorderThickness="1" BorderBrush="#2D3748">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Row 1: Numbers & Parentheses -->
+            <Grid Grid.Row="0" Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="7" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="7"/>
+                <Button Grid.Column="1" Content="8" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="8"/>
+                <Button Grid.Column="2" Content="9" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="9"/>
+                <Button Grid.Column="3" Content="(" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag="("/>
+                <Button Grid.Column="4" Content=")" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=")"/>
+                <Button Grid.Column="5" Content="^" Style="{StaticResource KeywordButtonStyle}" Click="OnKeyClick" Tag="^"/>
+                <Button Grid.Column="6" Content="DIV" Style="{StaticResource KeywordButtonStyle}" Click="OnKeyClick" Tag=" DIV "/>
+                <Button Grid.Column="7" Content="MOD" Style="{StaticResource KeywordButtonStyle}" Click="OnKeyClick" Tag=" MOD "/>
+                <Button Grid.Column="8" Content="=" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" = " x:Name="BtnEqual"/>
+                <Button Grid.Column="9" Content="&lt;&gt;" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" &lt;&gt; " x:Name="BtnNotEqual"/>
+                <Button Grid.Column="10" Content="←" Style="{StaticResource ActionButtonStyle}" Click="OnBackspaceClick"/>
+                <Button Grid.Column="11" Content="C" Style="{StaticResource ActionButtonStyle}" Click="OnClearClick"/>
+            </Grid>
+
+            <!-- Row 2: Numbers & Arithmetic Operators -->
+            <Grid Grid.Row="1" Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="4" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="4"/>
+                <Button Grid.Column="1" Content="5" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="5"/>
+                <Button Grid.Column="2" Content="6" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="6"/>
+                <Button Grid.Column="3" Content="*" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" * "/>
+                <Button Grid.Column="4" Content="/" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" / "/>
+                <Button Grid.Column="5" Content="&lt;" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" &lt; " x:Name="BtnLess"/>
+                <Button Grid.Column="6" Content="&lt;=" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" &lt;= " x:Name="BtnLessEq"/>
+                <Button Grid.Column="7" Content="&gt;" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" &gt; " x:Name="BtnGreater"/>
+                <Button Grid.Column="8" Content="&gt;=" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" &gt;= " x:Name="BtnGreaterEq"/>
+                <Button Grid.Column="9" Content="NOT" Style="{StaticResource KeywordButtonStyle}" Click="OnKeyClick" Tag=" NOT " x:Name="BtnNot"/>
+            </Grid>
+
+            <!-- Row 3: Numbers & Logical Operators -->
+            <Grid Grid.Row="2" Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="1" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="1"/>
+                <Button Grid.Column="1" Content="2" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="2"/>
+                <Button Grid.Column="2" Content="3" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="3"/>
+                <Button Grid.Column="3" Content="+" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" + "/>
+                <Button Grid.Column="4" Content="-" Style="{StaticResource OpButtonStyle}" Click="OnKeyClick" Tag=" - "/>
+                <Button Grid.Column="5" Content="AND" Style="{StaticResource KeywordButtonStyle}" Click="OnKeyClick" Tag=" AND " x:Name="BtnAnd"/>
+                <Button Grid.Column="6" Content="OR" Style="{StaticResource KeywordButtonStyle}" Click="OnKeyClick" Tag=" OR " x:Name="BtnOr"/>
+                <Button Grid.Column="7" Content="TRUE" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag=" TRUE " x:Name="BtnTrue"/>
+                <Button Grid.Column="8" Content="FALSE" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag=" FALSE " x:Name="BtnFalse"/>
+            </Grid>
+
+            <!-- Row 4: Zero, Decimal, Space -->
+            <Grid Grid.Row="3" Margin="0,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="0" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="0"/>
+                <Button Grid.Column="1" Content="." Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag="."/>
+                <Button Grid.Column="2" Content="SPACE" Style="{StaticResource KeyButtonStyle}" Click="OnKeyClick" Tag=" "/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
