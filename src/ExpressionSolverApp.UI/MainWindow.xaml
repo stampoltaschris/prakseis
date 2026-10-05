@@ -8,6 +8,7 @@
         Title="Επιλυτής &amp; Οπτικοποιητής Μαθηματικών &amp; Λογικών Παραστάσεων (Λυκείου)"
         Height="800" Width="1280" MinWidth="1024" MinHeight="700"
         WindowStartupLocation="CenterScreen"
+        Loaded="OnWindowLoaded"
         Background="#0F172A">
 
     <Window.Resources>

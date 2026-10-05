@@ -24,7 +24,10 @@ public partial class MainWindow : Window
         _playTimer = new DispatcherTimer();
         _playTimer.Interval = TimeSpan.FromSeconds(1.5);
         _playTimer.Tick += OnPlayTimerTick;
+    }
 
+    private void OnWindowLoaded(object sender, RoutedEventArgs e)
+    {
         PopulatePresets();
         UpdateModeUI();
         TxtExpression.Text = "3 + 5 * 2 ^ 3";
